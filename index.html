@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Happy 17th Birthday Raman! 🎮🏎️</title>
     <style>
         * {
@@ -18,6 +21,13 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
 
         .matrix-bg {
@@ -94,6 +104,8 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
 
         .interest-card:hover {
@@ -167,6 +179,8 @@
             padding: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
 
         .mini-game:hover {
@@ -206,17 +220,13 @@
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 2px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
 
         .start-button:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(255, 107, 107, 0.5);
-        }
-
-        .start-button:disabled {
-            background: #666;
-            cursor: not-allowed;
-            transform: none;
         }
 
         /* Game Screens */
@@ -259,6 +269,9 @@
             position: relative;
             margin: 30px 0;
             overflow: hidden;
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
 
         .car {
@@ -297,6 +310,12 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .option:hover {
@@ -330,6 +349,8 @@
             font-size: 1.1rem;
             margin: 20px;
             transition: all 0.3s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
 
         .close-game:hover {
@@ -384,6 +405,8 @@
             align-items: center;
             justify-content: center;
             font-size: 2rem;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
 
         .memory-cell.active {
@@ -490,7 +513,35 @@
             .interests-grid { grid-template-columns: 1fr; }
             .games-container { grid-template-columns: 1fr; }
             .game-screen { padding: 10px; }
-            .memory-cell { width: 60px; height: 60px; }
+            .memory-cell { width: 60px; height: 60px; font-size: 1.5rem; }
+            .container { padding: 10px; }
+            .game-section { padding: 20px; }
+            .birthday-message { padding: 20px; }
+            .surprise-section { padding: 30px; }
+            .race-track { height: 200px; }
+            .car { font-size: 2rem; }
+            .start-button { 
+                font-size: 1.2rem; 
+                padding: 15px 25px;
+                margin: 20px auto;
+            }
+            .game-title { font-size: 2rem; }
+            .interest-card { padding: 20px; }
+            .quiz-container { padding: 20px; }
+            .options { grid-template-columns: 1fr; }
+            .memory-board { max-width: 300px; }
+        }
+
+        @media (max-width: 480px) {
+            .birthday-title { font-size: 2rem; }
+            .age-badge { font-size: 1.5rem; padding: 10px 20px; }
+            .subtitle { font-size: 1.2rem; }
+            .message-text { font-size: 1.1rem; }
+            .memory-cell { width: 50px; height: 50px; font-size: 1.2rem; }
+            .interest-icon { font-size: 3rem; }
+            .game-icon { font-size: 2.5rem; }
+            .race-track { height: 150px; }
+            .car { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -574,10 +625,10 @@
                 </div>
             </div>
 
-            <button class="start-button" id="surpriseButton" onclick="startBirthdaySequence()" disabled>
-                🎂 Unlock Epic Birthday Surprise! 🎂
+            <button class="start-button" id="surpriseButton" onclick="startBirthdaySequence()">
+                🎂 Epic Birthday Surprise! 🎂
             </button>
-            <p id="progress-text" style="color: #4ecdc4; margin-top: 15px;">Complete all 3 games to unlock the surprise!</p>
+            <p id="progress-text" style="color: #4ecdc4; margin-top: 15px;">Ready for your birthday surprise? Click above! 🎉</p>
         </div>
 
         <!-- Surprise Section -->
@@ -615,7 +666,7 @@
                 <div class="car" id="raceCar">🏎️</div>
                 <div style="position: absolute; right: 50px; top: 50%; color: #4ecdc4; font-size: 2rem;">🏁</div>
             </div>
-            <p style="color: #fff; font-size: 1.2rem;">Press SPACEBAR to accelerate! 🚀</p>
+            <p style="color: #fff; font-size: 1.2rem;">TAP the track or press SPACEBAR to accelerate! 🚀</p>
             <div class="score" id="raceScore">Distance: 0%</div>
         </div>
     </div>
@@ -695,7 +746,6 @@
         window.onload = function() {
             initMatrix();
             createParticles();
-            updateProgressButton();
         };
 
         // Matrix background
@@ -779,19 +829,7 @@
         }
 
         function updateProgressButton() {
-            const completedCount = Object.values(gameCompleted).filter(Boolean).length;
-            const button = document.getElementById('surpriseButton');
-            const progressText = document.getElementById('progress-text');
-            
-            if (completedCount === 3) {
-                button.disabled = false;
-                button.style.background = 'linear-gradient(45deg, #ff6b6b, #4ecdc4)';
-                button.style.cursor = 'pointer';
-                progressText.textContent = '🎉 All games completed! Click to unlock your surprise! 🎉';
-                progressText.style.color = '#ff6b6b';
-            } else {
-                progressText.textContent = `Complete all 3 games to unlock the surprise! (${completedCount}/3 completed)`;
-            }
+            // Removed - button is always available now
         }
 
         function markGameCompleted(gameType) {
@@ -799,7 +837,6 @@
             document.getElementById(gameType + '-card').classList.add('completed');
             document.getElementById(gameType + '-status').textContent = '✅ Completed!';
             document.getElementById(gameType + '-status').style.color = '#4ecdc4';
-            updateProgressButton();
             showLevelUp();
         }
 
@@ -824,18 +861,26 @@
             }
         }
 
-        // Racing Game
+        // Racing Game - Mobile optimized
         function initRacingGame() {
             racePosition = 0;
             document.getElementById('raceCar').style.left = '50px';
             document.getElementById('raceScore').textContent = 'Distance: 0%';
             
+            // Mobile touch handler
+            const raceTrack = document.getElementById('raceTrack');
+            raceTrack.ontouchstart = function(e) {
+                e.preventDefault();
+                moveRaceCar();
+            };
+            raceTrack.onclick = moveRaceCar;
+            
+            // Keyboard handler for desktop
             document.addEventListener('keydown', raceKeyHandler);
         }
 
-        function raceKeyHandler(e) {
-            if (e.code === 'Space' && document.getElementById('racingGame').style.display === 'block') {
-                e.preventDefault();
+        function moveRaceCar() {
+            if (document.getElementById('racingGame').style.display === 'block') {
                 racePosition += 8;
                 if (racePosition > 85) racePosition = 85;
                 
@@ -850,6 +895,13 @@
                         closeGame('racing');
                     }, 500);
                 }
+            }
+        }
+
+        function raceKeyHandler(e) {
+            if ((e.code === 'Space' || e.key === ' ') && document.getElementById('racingGame').style.display === 'block') {
+                e.preventDefault();
+                moveRaceCar();
             }
         }
 
@@ -959,6 +1011,12 @@
             if (showingSequence) return;
             
             const cell = document.querySelector(`[data-index="${cellIndex}"]`);
+            
+            // Haptic feedback for mobile
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
             cell.classList.add('clicked');
             setTimeout(() => cell.classList.remove('clicked'), 200);
             
@@ -967,6 +1025,9 @@
             // Check if current click is correct
             if (userSequence[userSequence.length - 1] !== memorySequence[userSequence.length - 1]) {
                 // Wrong sequence
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100]);
+                }
                 alert('❌ Wrong sequence! Try again! ❌');
                 userSequence = [];
                 document.getElementById('memoryStart').style.display = 'block';
@@ -978,6 +1039,9 @@
                 memoryLevel++;
                 if (memoryLevel > 3) {
                     // Game completed
+                    if (navigator.vibrate) {
+                        navigator.vibrate([200, 100, 200, 100, 200]);
+                    }
                     setTimeout(() => {
                         alert('🧠 Memory Master! You completed all levels! 🧠');
                         markGameCompleted('memory');
